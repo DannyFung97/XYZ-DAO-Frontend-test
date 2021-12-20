@@ -203,18 +203,19 @@ export function fetchNotifications({
   target?: string;
   timestamp?: number | null;
 }): Promise<NotificationType[]> {
-  const url = new URL('/api/notifications/list', config.api.baseUrl);
-  if (target) {
-    url.searchParams.set('target', target);
-  }
+  // const url = new URL('/api/notifications/list', config.api.baseUrl);
+  // if (target) {
+  //   url.searchParams.set('target', target);
+  // }
 
-  if (timestamp) {
-    url.searchParams.set('timestamp', String(timestamp));
-  }
+  // if (timestamp) {
+  //   url.searchParams.set('timestamp', String(timestamp));
+  // }
+  const STRINGIFIED_ETHERSCAN_API_KEY = String(process.env.REACT_APP_ETHERSCAN_API_KEY)
 
-  return fetch(url.toString())
+  return fetch(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${STRINGIFIED_ETHERSCAN_API_KEY}`)
     .then(result => result.json())
-    .then(result => result.data ?? []);
+    .then(result => []);
 }
 
 const notificationsNode = document.querySelector('#notifications-root');

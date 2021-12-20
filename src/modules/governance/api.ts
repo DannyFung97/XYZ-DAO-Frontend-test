@@ -25,15 +25,19 @@ export type APIOverviewData = {
 };
 
 export function fetchOverviewData(): Promise<APIOverviewData> {
-  const url = new URL(`/api/governance/overview`, API_URL);
+  const STRINGIFIED_ETHERSCAN_API_KEY = String(process.env.REACT_APP_ETHERSCAN_API_KEY)
 
-  return fetch(url.toString())
-    .then(result => result.json())
-    .then(result => ({
-      ...result.data,
-      totalDelegatedPower: getHumanValue(new BigNumber(result.data.totalDelegatedPower), 18),
-      TotalVKek: getHumanValue(new BigNumber(result.data.TotalVKek), 18),
-    }));
+  return fetch(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${STRINGIFIED_ETHERSCAN_API_KEY}`)
+  .then(result => result.json())
+  .then(result => ({
+    avgLockTimeSeconds: 0,
+    totalDelegatedPower: new BigNumber('0'),
+    TotalVKek: new BigNumber('0'),
+    holders: 0,
+    holdersStakingExcluded: 0,
+    voters: 0,
+    supernovaUsers: 0
+  }));
 }
 
 export type APIVoterEntity = {

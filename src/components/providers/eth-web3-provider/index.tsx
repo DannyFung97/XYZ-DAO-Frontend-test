@@ -7,7 +7,7 @@ import config from 'config';
 export const HttpsWeb3Provider = new Web3.providers.HttpProvider(config.web3.rpc.httpsUrl);
 export const WssWeb3Provider = new Web3.providers.WebsocketProvider(config.web3.rpc.wssUrl);
 export const MainnetHttpsWeb3Provider = new Web3.providers.HttpProvider(
-  'https://mainnet.infura.io/v3/25763b5ba15644a8b3079d3ee755bce5',
+  'https://eth-mainnet.alchemyapi.io/v2/96dgkVYbYoeZrmCSSu9zm8GuLLkx7Npf',
 );
 export const DEFAULT_WEB3_PROVIDER = HttpsWeb3Provider;
 
